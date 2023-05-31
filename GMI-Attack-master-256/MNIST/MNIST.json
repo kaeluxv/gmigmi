@@ -1,0 +1,27 @@
+{
+  "dataset":{
+    "name":"MNIST",
+    "img_path":"./imgs/0_to_9",
+    "gan_file_path":"./gan_list.txt",
+    "train_file_path":"./imgs/train_0_to_9",
+    "test_file_path":"./imgs/test_0_to_9",
+	"0to9_file_path":"./imgs/test1",
+    "img_type":"gray",
+    "img_size":32,
+    "model_name":"GAN",
+    "n_classes":10,
+    "gpus":"0",
+    "mcnn_state_dict":"./dict_state/mcnn_dict_state/data.pkl",
+    "scnn_statet_dict":"./dict_state/scnn_dict_state/data.pkl",
+    "generator_state_dict":"./Attack/attack_models/MNIST_G/data.pkl",
+    "discriminator_state_dict":"./Attack/attack_models/MNIST_D/data.pkl"
+  },
+  "GAN":{
+    "epochs":100,
+   	"batch_size":64,
+    "lr":0.0002,
+    "z_dim":256,
+    "n_critic":5,
+    "weight_decay":1e-4
+  }
+}

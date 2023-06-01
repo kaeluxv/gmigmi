@@ -121,7 +121,7 @@ def load_my_state_dict(self, state_dict):
     #print(state_dict)
     for name, param in state_dict.items():
         if name not in own_state:
-            print(name)
+            print("key name invalid: ", name)
             continue
         #print(param.data.shape)
         own_state[name].copy_(param.data)

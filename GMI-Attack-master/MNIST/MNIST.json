@@ -1,7 +1,7 @@
 {
   "dataset":{
     "name":"MNIST",
-    "img_path":"./imgs/0_to_9",
+    "img_path":"./imgs/test",
     "gan_file_path":"./gan_list.txt",
     "train_file_path":"./imgs/train_0_to_9",
     "test_file_path":"./imgs/test_0_to_9",

@@ -33,11 +33,11 @@ class MCNN(nn.Module):
         self.fc_layer = nn.Linear(self.feat_dim, self.num_classes)
             
     def forward(self, x):
-        feature = self.feature(x)
-        feature = feature.view(feature.size(0), -1)
-        out = self.fc_layer(feature)
-        return [feature, out]
-       # return feature
+        feature = self.feature[:4](x)
+       # feature = feature.view(feature.size(0), -1)
+       # out = self.fc_layer(feature)
+       # return [feature, out]
+        return feature
 
 class SCNN(nn.Module):
     def __init__(self, num_classes=10):

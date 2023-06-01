@@ -9,7 +9,7 @@ num_classes = 10
 log_path = "../attack_logs"
 os.makedirs(log_path, exist_ok=True)
 
-def inversion(G, D, T, E, iden, lr=0.2, momentum=0.9, lamda=100, iter_times=10, clip_range=1):
+def inversion(G, D, T, E, iden, lr=0.2, momentum=0.9, lamda=100, iter_times=500, clip_range=1):
 	#iden = iden.cuda()
 	iden = iden.view(-1).long().cuda()
 	criterion = nn.CrossEntropyLoss().cuda()
@@ -63,25 +63,25 @@ def inversion(G, D, T, E, iden, lr=0.2, momentum=0.9, lamda=100, iter_times=10, 
             
 
 
-			if (i+1) % 1 == 0:
+			if (i+1) % 100 == 0:
 				fake_img = G(z.detach())
 				eval_prob = E(fake_img)[-1]
 				eval_iden = torch.argmax(eval_prob, dim=1).view(-1)
 				acc = iden.eq(eval_iden.long()).sum().item() * 1.0 / bs   
 				print("Iteration:{}\tIden:{}\tT:{}\tE:{}\tPrior Loss:{:.2f}\tIden Loss:{:.2f}\tAttack Acc:{:.2f}".format(i+1, iden, torch.argmax(out, dim=1).view(-1), eval_iden, Prior_Loss_val, Iden_Loss_val, acc))
 				#print("fake_img : ", fake_img)
-			#	root_path = "./Attack"
-			#	save_img_dir = os.path.join(root_path, "GMI_imgs")
-			#	os.makedirs(save_img_dir, exist_ok=True)
+				root_path = "./Attack"
+				save_img_dir = os.path.join(root_path, "GMI_imgs")
+				os.makedirs(save_img_dir, exist_ok=True)
 			#	print("fake_img: ", fake_img)
-			#	save_tensor_images(fake_img.detach(), os.path.join(save_img_dir, "attack_image1_{}.png".format(i)), nrow = 10)
+				save_tensor_images(fake_img.detach(), os.path.join(save_img_dir, "attack_image{}_{}.png".format(random_seed, i)), nrow = 10)
 
 
 		# save images
-		root_path = "./Attack"
-		save_img_dir = os.path.join(root_path, "GMI_imgs")
-		os.makedirs(save_img_dir, exist_ok=True)
-		save_tensor_images(fake.detach(), os.path.join(save_img_dir, "attack_image{}_{}.png".format(random_seed, iter_times)), nrow = 10)
+	#	root_path = "./Attack"
+	#	save_img_dir = os.path.join(root_path, "GMI_imgs")
+	#	os.makedirs(save_img_dir, exist_ok=True)
+	#	save_tensor_images(fake.detach(), os.path.join(save_img_dir, "attack_image{}_{}.png".format(random_seed, iter_times)), nrow = 10)
 
 		score = T(fake)[-1]
 		eval_prob = E(fake)[-1]

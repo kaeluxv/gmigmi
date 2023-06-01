@@ -119,13 +119,13 @@ if __name__ == "__main__":
 	ckp_E = torch.load(e_path)['state_dict']
 	utils.load_my_state_dict(E, ckp_E)
 
-	g_path = "./Attack/attack_models/MNIST_G.tar"
+	g_path = "./dasol/MNIST_G.tar"
 	G = generator.GeneratorMNIST()
 	G = nn.DataParallel(G).cuda()
 	ckp_G = torch.load(g_path)['state_dict']
 	utils.load_my_state_dict(G, ckp_G)
 
-	d_path = "./Attack/attack_models/MNIST_D.tar"
+	d_path = "./dasol/MNIST_D.tar"
 	D = discri.DGWGAN32()
 	D = nn.DataParallel(D).cuda()
 	ckp_D = torch.load(d_path)['state_dict']

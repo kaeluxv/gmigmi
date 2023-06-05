@@ -33,7 +33,7 @@ class MCNN(nn.Module):
         self.fc_layer = nn.Linear(self.feat_dim, self.num_classes)
             
     def forward(self, x):
-        feature = self.feature[:4](x)
+        feature = self.feature[:3](x)
        # feature = feature.view(feature.size(0), -1)
        # out = self.fc_layer(feature)
        # return [feature, out]

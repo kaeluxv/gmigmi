@@ -62,5 +62,5 @@ for i, imgs in enumerate(dataloader):
 #	output = my_model.features[:8](input)
 	print("output : ", output1)
 #	print("output size : ", output.size())
-	torch.save(output,'./mid_data/{}/output{}.pt'.format((i//5), (i%5)), pickle_module = pickle)
-
+	torch.save(output,'./mid_data/{}/output{}.pt'.format((i//5), (i%5)),pickle_module = pickle)
+ 

@@ -34,7 +34,7 @@ class MyModel(nn.Module):
 		self.fc_layer = nn.Linear(self.feat_dim, self.num_classes)
 	
 	def forward(self, x):
-		x = self.feature[:4](x)
+		x = self.feature[:3](x)
 	#	x = x.view(x.size(0), -1)
 	#	out = self.fc_layer(x)
 	#	return out
@@ -54,7 +54,7 @@ for i, imgs in enumerate(dataloader):
 #	print("imgs : ", imgs)
 #	print(imgs.dtype)
 	output = my_model.forward(imgs)
-	output1 = my_model.feature[4:](output)
+	output1 = my_model.feature[3:](output)
 	output1 = output1.view(output1.size(0),-1)
 	output1 = my_model.fc_layer(output1)
 	output1 = output1.data.max(1)[1]
@@ -62,6 +62,5 @@ for i, imgs in enumerate(dataloader):
 #	output = my_model.features[:8](input)
 	print("output : ", output1)
 #	print("output size : ", output.size())
-	torch.save(output,'output.pt',pickle_module = pickle)
-
+	torch.save(output,'./mid_data/{}/output{}.pt'.format((i//5), (i%5)), pickle_module = pickle)
 
